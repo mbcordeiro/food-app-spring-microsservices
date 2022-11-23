@@ -3,10 +3,7 @@ package br.com.matheuscordeiro.foodpayments.models;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -45,7 +42,8 @@ public class Payment {
     private String code;
 
     @NotNull
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Override
     public boolean equals(Object o) {

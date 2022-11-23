@@ -1,0 +1,7 @@
+package br.com.matheuscordeiro.foodpayments.models;
+
+public enum Status {
+    CREATED,
+    CONFIRMED,
+    CANCELED
+}

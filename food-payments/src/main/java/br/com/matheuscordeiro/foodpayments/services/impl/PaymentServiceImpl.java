@@ -39,9 +39,9 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentDto update(final Long id, final PaymentDto paymentDto) {
+    public void update(final Long id, final PaymentDto paymentDto) {
         paymentRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        return modelMapper.map(paymentRepository.save(modelMapper.map(paymentDto, Payment.class)), PaymentDto.class);
+        paymentRepository.save(modelMapper.map(paymentDto, Payment.class));
     }
 
     @Override

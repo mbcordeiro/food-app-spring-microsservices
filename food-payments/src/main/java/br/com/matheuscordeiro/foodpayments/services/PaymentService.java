@@ -11,7 +11,7 @@ public interface PaymentService {
 
     PaymentDto create(PaymentDto paymentDto);
 
-    PaymentDto update(Long id, PaymentDto paymentDto);
+    void update(Long id, PaymentDto paymentDto);
 
     void delete(Long id);
 }

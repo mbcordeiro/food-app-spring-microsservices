@@ -10,5 +10,7 @@ spring:
     client:
       serviceUrl:
         defaultZone: http://localhost:8081/eureka
+    instance:
+      instance-id=${spring.application.name}:${random.int}
   server:
     port: '0'

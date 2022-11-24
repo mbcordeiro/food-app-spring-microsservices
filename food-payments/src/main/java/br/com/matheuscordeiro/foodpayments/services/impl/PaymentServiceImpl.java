@@ -1,6 +1,7 @@
 package br.com.matheuscordeiro.foodpayments.services.impl;
 
 import br.com.matheuscordeiro.foodpayments.dtos.PaymentDto;
+import br.com.matheuscordeiro.foodpayments.https.OrderClient;
 import br.com.matheuscordeiro.foodpayments.models.Payment;
 import br.com.matheuscordeiro.foodpayments.models.Status;
 import br.com.matheuscordeiro.foodpayments.repositories.PaymentRepository;
@@ -20,6 +21,8 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
 
     private final ModelMapper modelMapper;
+
+    private final OrderClient orderClient;
 
     @Override
     public Page<PaymentDto> findPayments(final Pageable pageable) {
@@ -50,5 +53,13 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void delete(final Long id) {
         paymentRepository.findById(id);
+    }
+
+    @Override
+    public void confirmPayment(Long id) {
+        final var payment = paymentRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        payment.setStatus(Status.CONFIRMED);
+        paymentRepository.save(payment);
+        orderClient.updateStatus(payment.getOrderId());
     }
 }

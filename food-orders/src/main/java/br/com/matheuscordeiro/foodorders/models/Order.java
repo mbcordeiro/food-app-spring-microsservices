@@ -1,4 +1,4 @@
-package br.com.matheuscordeiro.foodorders;
+package br.com.matheuscordeiro.foodorders.models;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +25,6 @@ public class Order {
     private LocalDateTime date;
 
     @NotNull
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

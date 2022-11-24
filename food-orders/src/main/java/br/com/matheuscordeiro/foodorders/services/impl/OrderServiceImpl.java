@@ -1,6 +1,7 @@
 package br.com.matheuscordeiro.foodorders.services.impl;
 
 import br.com.matheuscordeiro.foodorders.dtos.OrderDto;
+import br.com.matheuscordeiro.foodorders.dtos.StatusDto;
 import br.com.matheuscordeiro.foodorders.models.Order;
 import br.com.matheuscordeiro.foodorders.models.Status;
 import br.com.matheuscordeiro.foodorders.repositories.OrderRepository;
@@ -45,11 +46,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateStatus(final Long id, final OrderDto orderDto) {
+    public void updateStatus(final Long id, final StatusDto statusDto) {
         final var order = orderRepository.findByIdWithItems(id).orElseThrow(EntityNotFoundException::new);
-        orderDto.setStatus(orderDto.getStatus());
-        orderRepository.updateStatus(orderDto.getStatus(), order);
-        modelMapper.map(order, OrderDto.class);
+        order.setStatus(statusDto.getStatus());
+        orderRepository.updateStatus(statusDto.getStatus(), order);
     }
 
     @Override

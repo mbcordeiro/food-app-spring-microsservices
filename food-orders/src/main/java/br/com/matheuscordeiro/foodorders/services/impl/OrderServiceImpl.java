@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public OrderDto create(final OrderDto orderDto) {
         final var order = modelMapper.map(orderDto, Order.class);
         order.setDate(LocalDateTime.now());
@@ -46,6 +48,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public void updateStatus(final Long id, final StatusDto statusDto) {
         final var order = orderRepository.findByIdWithItems(id).orElseThrow(EntityNotFoundException::new);
         order.setStatus(statusDto.getStatus());
@@ -53,6 +56,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public void approvePaymentOrder(final Long id) {
         final var order = orderRepository.findByIdWithItems(id).orElseThrow(EntityNotFoundException::new);
         order.setStatus(Status.PAID);

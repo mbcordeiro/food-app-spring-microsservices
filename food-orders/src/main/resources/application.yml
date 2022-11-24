@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/foodapp-orders?createDatabaseIfNotExist=true
+    url: jdbc:mysql://root:mysqlpw@localhost:49153/foodapp-orders?createDatabaseIfNotExist=true
     username: root
     password: root
   application:

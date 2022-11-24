@@ -62,4 +62,11 @@ public class PaymentServiceImpl implements PaymentService {
         paymentRepository.save(payment);
         orderClient.updateStatus(payment.getOrderId());
     }
+
+    @Override
+    public void updateStatus(Long id) {
+        final var payment = paymentRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        payment.setStatus(Status.CONFIRMED_WITHOUT_INTEGRATION);
+        paymentRepository.save(payment);
+    }
 }

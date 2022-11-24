@@ -2,6 +2,7 @@ package br.com.matheuscordeiro.foodpayments.controllers;
 
 import br.com.matheuscordeiro.foodpayments.dtos.PaymentDto;
 import br.com.matheuscordeiro.foodpayments.services.PaymentService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,7 +49,12 @@ public class PaymentController {
     }
 
     @PatchMapping("/{id}/confirm")
+    @CircuitBreaker(name = "updateStatus", fallbackMethod = "paymentAuthorizedPendingIntegration")
     public void confirm(@PathVariable @NotNull Long id){
         paymentService.confirmPayment(id);
+    }
+
+    public void paymentAuthorizedPendingIntegration(Long id, Exception e) {
+        paymentService.updateStatus(id);
     }
 }

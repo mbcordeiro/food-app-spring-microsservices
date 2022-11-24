@@ -25,4 +25,7 @@ public class OrderItem {
     private Integer quantity;
 
     private String description;
+
+    @ManyToOne(optional = false)
+    private Order order;
 }

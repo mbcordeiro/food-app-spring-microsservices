@@ -8,6 +8,8 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -26,4 +28,7 @@ public class Order {
     @NotNull
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "order")
+    private List<OrderItem> orderItems = new ArrayList<>();
 }

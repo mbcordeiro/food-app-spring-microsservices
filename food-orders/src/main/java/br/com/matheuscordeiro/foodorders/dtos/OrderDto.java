@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderDto {
     private Long id;
-    private LocalDateTime date;
+    private LocalDateTime dateCreation;
     private Status status;
     private List<OrderItem> orderItems = new ArrayList<>();
 }

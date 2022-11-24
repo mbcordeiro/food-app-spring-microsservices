@@ -23,7 +23,7 @@ public class Order {
     private Long id;
 
     @NotNull
-    private LocalDateTime date;
+    private LocalDateTime dateCreation;
 
     @NotNull
     @Enumerated(EnumType.STRING)

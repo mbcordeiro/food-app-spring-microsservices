@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderDto create(final OrderDto orderDto) {
         final var order = modelMapper.map(orderDto, Order.class);
-        order.setDate(LocalDateTime.now());
+        order.setDateCreation(LocalDateTime.now());
         order.setStatus(Status.ACCOMPLISHED);
         order.getOrderItems().forEach(item -> item.setOrder(order));
         return modelMapper.map(orderRepository.save(order), OrderDto.class);

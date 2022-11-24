@@ -12,13 +12,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
-    private PaymentRepository paymentRepository;
+    private final PaymentRepository paymentRepository;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Override
     public Page<PaymentDto> findPayments(final Pageable pageable) {
@@ -32,6 +33,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    @Transactional
     public PaymentDto create(final PaymentDto paymentDto) {
         final var payment = modelMapper.map(paymentDto, Payment.class);
         payment.setStatus(Status.CREATED);
@@ -39,6 +41,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    @Transactional
     public void update(final Long id, final PaymentDto paymentDto) {
         paymentRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         paymentRepository.save(modelMapper.map(paymentDto, Payment.class));

@@ -7,23 +7,22 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import javax.validation.constraints.Positive;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "order_item")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Order {
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private LocalDateTime date;
+    @Positive
+    private Integer quantity;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String description;
 }

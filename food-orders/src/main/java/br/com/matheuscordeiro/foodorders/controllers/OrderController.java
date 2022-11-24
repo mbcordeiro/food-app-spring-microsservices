@@ -40,7 +40,7 @@ public class OrderController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}/pago")
+    @PutMapping("/{id}/paid")
     public ResponseEntity<Void> approvePayment(@PathVariable @NotNull Long id) {
         orderService.approvePaymentOrder(id);
         return ResponseEntity.noContent().build();

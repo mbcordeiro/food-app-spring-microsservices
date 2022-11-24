@@ -5,7 +5,7 @@ spring:
     username: root
     password: root
   application:
-    name: pedidos-ms
+    name: order-ms
   eureka:
     client:
       serviceUrl:

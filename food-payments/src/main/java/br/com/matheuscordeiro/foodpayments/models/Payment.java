@@ -46,6 +46,14 @@ public class Payment {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @NotNull
+    @Column(name = "order_id")
+    private Long orderId;
+
+    @NotNull
+    @Column(name = "payment_method_id")
+    private Long paymentMethodId;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

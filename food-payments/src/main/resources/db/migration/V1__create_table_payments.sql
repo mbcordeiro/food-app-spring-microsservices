@@ -6,5 +6,7 @@ CREATE TABLE payments (
     expiration VARCHAR(7) DEFAULT NULL,
     code VARCHAR(3) DEFAULT NULL,
     status VARCHAR(255) DEFAULT NULL,
+    payment_method_id BIGINT(20) NOT NULL,
+    order_id BIGINT(20) NOT NULL,
     PRIMARY KEY(id)
 );
